@@ -20,7 +20,7 @@ export const NationalIntensity = () => {
     <>
       <h1>National Intensity</h1>
       <h2>Current Carbon Intensity:</h2>
-      <p>{currentNationalIntensity}</p>
+      <h3>{currentNationalIntensity}</h3>
       <ChargingAdvice
         currentIntensityLevel={currentNationalIntensity}
         bestChargingPeriod={nextBestNationalChargingPeriod}

@@ -49,10 +49,13 @@ function App() {
           onChange={(date: Date) => setStartDate(date)}
           dateFormat="dd/MM/yyyy"
           // it looks like theres only two days worth of data returned by the api
+          // so let's lock the dates that can be selected
           includeDateIntervals={[{ start: addDays(-1), end: addDays(2) }]}
         />
         <br />
-        <button onClick={handleClick}>Search</button>
+        <button disabled={!postcode} onClick={handleClick}>
+          Search
+        </button>
       </div>
     </div>
   );

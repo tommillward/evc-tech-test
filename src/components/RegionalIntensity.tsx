@@ -10,7 +10,6 @@ export const RegionalIntensity = () => {
   const regionalIntensityData = useSelector(
     (state: ReduxState) => state.carbonIntensity.regionalIntensity
   );
-  console.log(regionalIntensityData);
   if (regionalIntensityData === null) {
     return <p>No postcode found</p>;
   }
@@ -24,7 +23,7 @@ export const RegionalIntensity = () => {
     <>
       <h1>Regional Carbon Intensity</h1>
       <h2>Current Intensity for {regionalIntensityData.data.postcode}:</h2>
-      <p>{currentRegionalIntensity}</p>
+      <h3>{currentRegionalIntensity}</h3>
       <ChargingAdvice
         currentIntensityLevel={currentRegionalIntensity}
         bestChargingPeriod={nextBestRegionalChargingPeriod}
