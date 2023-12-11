@@ -1,16 +1,19 @@
+import { useSelector } from "react-redux";
 import { ChargingAdvice } from "./ChargingAdvice";
 import {
   currentIntensity,
   nextBestChargingPeriod,
 } from "../helpers/carbonIntensityHelpers";
 
-interface NationalIntensityProps {
-  data: any;
-}
+export const NationalIntensity = () => {
+  const nationalIntensityData = useSelector(
+    (state: any) => state.carbonIntensity.nationalIntensity
+  );
 
-export const NationalIntensity = ({ data }: NationalIntensityProps) => {
-  const currentNationalIntensity = currentIntensity(data);
-  const nextBestNationalChargingPeriod = nextBestChargingPeriod(data);
+  const currentNationalIntensity = currentIntensity(nationalIntensityData);
+  const nextBestNationalChargingPeriod = nextBestChargingPeriod(
+    nationalIntensityData
+  );
 
   return (
     <>

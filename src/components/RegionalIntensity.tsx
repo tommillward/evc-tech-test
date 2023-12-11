@@ -1,26 +1,28 @@
-import { RegionalIntensityInterface } from "../types";
+import { useSelector } from "react-redux";
 import { ChargingAdvice } from "./ChargingAdvice";
 import {
   currentIntensity,
   nextBestChargingPeriod,
 } from "../helpers/carbonIntensityHelpers";
 
-interface RegionalIntensityProps {
-  data: RegionalIntensityInterface | null;
-}
-
-export const RegionalIntensity = ({ data }: RegionalIntensityProps) => {
-  if (data === null) {
+export const RegionalIntensity = () => {
+  const regionalIntensityData = useSelector(
+    (state: any) => state.carbonIntensity.regionalIntensity
+  );
+  console.log(regionalIntensityData);
+  if (regionalIntensityData === null) {
     return <p>No postcode found</p>;
   }
 
-  const currentRegionalIntensity = currentIntensity(data.data);
-  const nextBestRegionalChargingPeriod = nextBestChargingPeriod(data.data);
+  const currentRegionalIntensity = currentIntensity(regionalIntensityData.data);
+  const nextBestRegionalChargingPeriod = nextBestChargingPeriod(
+    regionalIntensityData.data
+  );
 
   return (
     <>
       <h1>Regional Carbon Intensity</h1>
-      <h2>Current Intensity for {data.data.postcode}:</h2>
+      <h2>Current Intensity for {regionalIntensityData.data.postcode}:</h2>
       <p>{currentRegionalIntensity}</p>
       <ChargingAdvice
         currentIntensityLevel={currentRegionalIntensity}

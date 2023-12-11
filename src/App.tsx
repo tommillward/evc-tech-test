@@ -13,40 +13,32 @@ function App() {
   const [postcode, setPostcode] = useState<string>("");
   const [startDate, setStartDate] = useState(new Date());
 
-  const {
-    data: nationalIntensityData,
-    isLoading,
-    error,
-  } = useGetNationalIntensity();
+  const { isLoading: loadingNational, error: nationalError } =
+    useGetNationalIntensity();
 
   const {
     fetchRegionalIntensity,
-    data: regionalIntensityData,
-    isLoading: loadingTom,
-    error: errorTom,
+    isLoading: loadingRegional,
+    error: regionalError,
   } = useGetRegionalIntensity();
 
-  const loading = isLoading || loadingTom;
-  const isError = error || errorTom;
+  const isLoading = loadingNational || loadingRegional;
+  const isError = nationalError || regionalError;
 
   const handleClick = () => {
     setShowRegionalIntensity(true);
     fetchRegionalIntensity(postcode, startDate);
   };
 
-  if (loading) {
+  if (isLoading) {
     return <h1>LOADING</h1>;
   }
   if (isError) {
-    return <h1>{error || errorTom}</h1>;
+    return <h1>{nationalError || regionalError}</h1>;
   }
   return (
     <div className="App">
-      {showRegionalIntensity ? (
-        <RegionalIntensity data={regionalIntensityData} />
-      ) : (
-        <NationalIntensity data={nationalIntensityData} />
-      )}
+      {showRegionalIntensity ? <RegionalIntensity /> : <NationalIntensity />}
 
       <div>
         <h4>Enter postcode</h4>
@@ -54,7 +46,7 @@ function App() {
         <h4>Enter date</h4>
         <DatePicker
           selected={startDate}
-          onChange={(date: any) => setStartDate(date)}
+          onChange={(date: Date) => setStartDate(date)}
           dateFormat="dd/MM/yyyy"
           // it looks like theres only two days worth of data returned by the api
           includeDateIntervals={[{ start: addDays(-1), end: addDays(2) }]}
