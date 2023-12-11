@@ -4,19 +4,20 @@ import {
   currentIntensity,
   nextBestChargingPeriod,
 } from "../helpers/carbonIntensityHelpers";
+import { ReduxState } from "../types";
 
 export const RegionalIntensity = () => {
   const regionalIntensityData = useSelector(
-    (state: any) => state.carbonIntensity.regionalIntensity
+    (state: ReduxState) => state.carbonIntensity.regionalIntensity
   );
   console.log(regionalIntensityData);
   if (regionalIntensityData === null) {
     return <p>No postcode found</p>;
   }
 
-  const currentRegionalIntensity = currentIntensity(regionalIntensityData.data);
+  const currentRegionalIntensity = currentIntensity(regionalIntensityData);
   const nextBestRegionalChargingPeriod = nextBestChargingPeriod(
-    regionalIntensityData.data
+    regionalIntensityData
   );
 
   return (

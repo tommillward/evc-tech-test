@@ -3,15 +3,7 @@ import {
   UPDATE_REGIONAL_INTENSITY,
 } from "../actions/actionTypes";
 
-// enum ActionType {
-//   UPDATE_NATIONAL_INTENSITY = UPDATE_NATIONAL_INTENSITY,
-//   UPDATE_REGIONAL_INTENSITY,
-// }
-
-interface Action {
-  type: string;
-  payload: any;
-}
+import { Action } from "../types";
 
 const initialState = {
   nationalIntensity: null,

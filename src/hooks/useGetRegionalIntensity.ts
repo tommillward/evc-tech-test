@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getRegionalCarbonIntensity } from "../service";
 import { useDispatch } from "react-redux";
 import { updateRegionalIntensity } from "../actions/actions";
+import { transformRegionalIntensityData } from "../helpers/carbonIntensityHelpers";
 
 interface RegionalIntensityInterface {
   isLoading: boolean;
@@ -19,7 +20,9 @@ export const useGetRegionalIntensity = (): RegionalIntensityInterface => {
     setIsLoading(true);
     getRegionalCarbonIntensity(postcode, startDate)
       .then((response) => {
-        dispatch(updateRegionalIntensity(response.data));
+        dispatch(
+          updateRegionalIntensity(transformRegionalIntensityData(response.data))
+        );
         setIsLoading(false);
       })
       .catch((error) => {

@@ -4,10 +4,11 @@ import {
   currentIntensity,
   nextBestChargingPeriod,
 } from "../helpers/carbonIntensityHelpers";
+import { ReduxState } from "../types";
 
 export const NationalIntensity = () => {
   const nationalIntensityData = useSelector(
-    (state: any) => state.carbonIntensity.nationalIntensity
+    (state: ReduxState) => state.carbonIntensity.nationalIntensity
   );
 
   const currentNationalIntensity = currentIntensity(nationalIntensityData);

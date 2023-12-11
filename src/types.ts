@@ -1,30 +1,35 @@
 export type IntensityLevels = "low" | "very low" | "moderate" | "high";
 
-export interface RegionalIntensityInterface {
-  data: RegionalIntensityData;
-}
-
 export interface RegionalIntensityData {
-  regionid: number;
-  dnoregion: string;
-  shortname: string;
-  postcode: string;
-  data: IntensityData[];
+  data: CarbonIntensityData;
 }
 
-export interface IntensityData {
+export interface CarbonIntensityData {
+  postcode?: string;
+  data: PeriodIntensityData[];
+}
+
+export interface PeriodIntensityData {
   from: string;
   to: string;
-  intensity: Intensity;
-  generationmix: Generationmix[];
+  intensityIndex: IntensityLevels;
 }
 
-export interface Generationmix {
-  fuel: string;
-  perc: number;
+type ActionTypes = "UPDATE_NATIONAL_INTENSITY" | "UPDATE_REGIONAL_INTENSITY";
+
+export type IntensityPayload =
+  | RegionalIntensityData
+  | CarbonIntensityData
+  | null;
+
+export interface Action {
+  type: ActionTypes;
+  payload: CarbonIntensityData | RegionalIntensityData;
 }
 
-export interface Intensity {
-  forecast: number;
-  index: IntensityLevels;
+export interface ReduxState {
+  carbonIntensity: {
+    regionalIntensity: RegionalIntensityData;
+    nationalIntensity: CarbonIntensityData;
+  };
 }

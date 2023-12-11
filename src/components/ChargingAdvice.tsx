@@ -1,10 +1,10 @@
-import { IntensityLevels } from "../types";
+import { IntensityLevels, PeriodIntensityData } from "../types";
 import { acceptedIntensityLevels } from "../constants";
 import { isoToUtcString } from "../helpers/dateHelpers";
 
 interface CharingAdviceProps {
   currentIntensityLevel: IntensityLevels;
-  bestChargingPeriod?: any;
+  bestChargingPeriod?: PeriodIntensityData;
 }
 
 export const ChargingAdvice = ({
@@ -27,7 +27,7 @@ export const ChargingAdvice = ({
       <p>{`The best time to charge will be at ${isoToUtcString(
         bestChargingPeriod.from
       )}`}</p>
-      <p>{`As the Carbon Intensity level will be ${bestChargingPeriod.intensity.index}`}</p>
+      <p>{`As the Carbon Intensity level will be ${bestChargingPeriod.intensityIndex}`}</p>
     </>
   );
 };
