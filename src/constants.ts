@@ -1,0 +1,1 @@
+export const acceptedIntensityLevels = ["low", "very low"];
